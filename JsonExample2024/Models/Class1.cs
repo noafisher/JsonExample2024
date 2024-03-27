@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace JsonExample2024.Models
@@ -10,6 +11,18 @@ namespace JsonExample2024.Models
     public class MonkeyList
     {
         public List<Monkey> Monkeys { get; set; }
+
+        public void CreateList()
+        {
+            string text = File.ReadAllText(@"../../../monkeydata.json");
+            Monkeys = JsonSerializer.Deserialize<List<Monkey>>(text);
+        }
+
+        public MonkeyList() 
+        {
+            Monkeys = new List<Monkey>();
+            CreateList();
+        }
     }
 
     public class Monkey
@@ -22,7 +35,6 @@ namespace JsonExample2024.Models
         public float Latitude { get; set; }
         public float Longitude { get; set; }
     }
-
 
 
 }
